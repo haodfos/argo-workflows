@@ -624,3 +624,11 @@ parse-examples:
 .PHONY: checksums
 checksums:
 	for f in ./dist/argo-*.gz; do openssl dgst -sha256 "$$f" | awk ' { print $$2 }' > "$$f".sha256 ; done
+
+# 必须是dev- || release || tag 标记的才会构建成功
+.PHONY: argocli-haodf
+argocli-haodf: argocli-haodf-build-ui dist/argo-linux-amd64 argocli-hdf-image
+
+.PHONY: argocli-haodf-build-ui
+argocli-haodf-build-ui:
+ cd ui && NODE_OPTIONS="--max-old-space-size=2048" JOBS=max yarn --cwd ui build

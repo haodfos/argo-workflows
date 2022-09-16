@@ -151,3 +151,18 @@ COPY --from=argocli-build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=argocli-build /go/src/github.com/argoproj/argo-workflows/dist/argo /bin/
 
 ENTRYPOINT [ "argo" ]
+
+####################################################################################################
+
+FROM scratch as argocli-hdf
+
+USER 8737
+
+WORKDIR /home/argo
+
+COPY hack/ssh_known_hosts /etc/ssh/
+COPY hack/nsswitch.conf /etc/
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY ./dist/argo-linux-amd64 /bin/argo
+
+ENTRYPOINT [ "argo" ]
