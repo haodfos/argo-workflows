@@ -39,6 +39,7 @@ interface State {
     resourceVersion?: string;
     error?: Error;
     batchActionDisabled: Actions.OperationDisabled;
+    kiosk?: string;
 }
 
 interface WorkflowListRenderOptions {
@@ -82,6 +83,9 @@ export class WorkflowsList extends BasePage<RouteComponentProps<any>, State> {
         if (this.state.pagination.limit) {
             params.append('limit', this.state.pagination.limit.toString());
         }
+        if (this.state.kiosk) {
+            params.append('kiosk', this.state.kiosk);
+        }
         return params;
     }
 
@@ -112,6 +116,7 @@ export class WorkflowsList extends BasePage<RouteComponentProps<any>, State> {
                 offset: this.queryParam('offset'),
                 limit: parseLimit(this.queryParam('limit')) || savedOptions.paginationLimit || 50
             },
+            kiosk: this.queryParam('kiosk'),
             namespace: Utils.getNamespace(this.props.match.params.namespace) || '',
             selectedPhases: phaseQueryParam.length > 0 ? (phaseQueryParam as WorkflowPhase[]) : savedOptions.selectedPhases,
             selectedLabels: labelQueryParam.length > 0 ? (labelQueryParam as string[]) : savedOptions.selectedLabels,
