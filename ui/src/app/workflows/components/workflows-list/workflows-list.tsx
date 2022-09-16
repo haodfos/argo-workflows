@@ -21,7 +21,6 @@ import {ScopedLocalStorage} from '../../../shared/scoped-local-storage';
 import {services} from '../../../shared/services';
 import {Utils} from '../../../shared/utils';
 import * as Actions from '../../../shared/workflow-operations-map';
-import {shouldHide} from '../../../shared/kiosk';
 import {WorkflowCreator} from '../workflow-creator';
 import {WorkflowFilters} from '../workflow-filters/workflow-filters';
 import {WorkflowsRow} from '../workflows-row/workflows-row';
@@ -144,7 +143,7 @@ export class WorkflowsList extends BasePage<RouteComponentProps<any>, State> {
                 {ctx => (
                     <Page
                         title='Workflows'
-                        toolbar={!shouldHide(location) ? {
+                        toolbar={{
                             breadcrumbs: [
                                 {title: 'Workflows', path: uiUrl('workflows')},
                                 {title: this.state.namespace, path: uiUrl('workflows/' + this.state.namespace)}
@@ -158,7 +157,7 @@ export class WorkflowsList extends BasePage<RouteComponentProps<any>, State> {
                                     }
                                 ]
                             }
-                        } : null}>
+                        }}>
                         <WorkflowsToolbar
                             selectedWorkflows={this.state.selectedWorkflows}
                             clearSelection={() => this.setState({selectedWorkflows: new Map<string, models.Workflow>()})}

@@ -23,7 +23,6 @@ import {ChatButton} from './shared/components/chat-button';
 import ErrorBoundary from './shared/components/error-boundary';
 import {services} from './shared/services';
 import {Utils} from './shared/utils';
-import {shouldHide} from './shared/kiosk';
 import userinfo from './userinfo';
 import {Widgets} from './widgets/widgets';
 import workflowEventBindings from './workflow-event-bindings';
@@ -80,7 +79,6 @@ export const AppRouter = ({popupManager, history, notificationsManager}: {popupM
     }, []);
 
     const namespaceSuffix = Utils.managedNamespace ? '' : '/' + namespace;
-    const navBarStyle = Object.assign({backgroundColor: navBarBackgroundColor}, shouldHide(location) ? { display: 'none' } : {});
     return (
         <>
             {popupProps && <Popup {...popupProps} />}
@@ -88,7 +86,7 @@ export const AppRouter = ({popupManager, history, notificationsManager}: {popupM
                 <Switch>
                     <Route path={uiUrl('widgets')} component={Widgets} />
                     <Layout
-                        navBarStyle={navBarStyle}
+                        navBarStyle={{backgroundColor: navBarBackgroundColor}}
                         navItems={[
                             {
                                 title: 'Workflows',

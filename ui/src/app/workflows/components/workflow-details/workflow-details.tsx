@@ -51,6 +51,7 @@ export const WorkflowDetails = ({history, location, match}: RouteComponentProps<
     const [nodeId, setNodeId] = useState(queryParams.get('nodeId'));
     const [nodePanelView, setNodePanelView] = useState(queryParams.get('nodePanelView'));
     const [sidePanel, setSidePanel] = useState(queryParams.get('sidePanel'));
+    const [kiosk] = useState(queryParams.get('kiosk'));
     const [parameters, setParameters] = useState<Parameter[]>([]);
 
     useEffect(
@@ -77,8 +78,8 @@ export const WorkflowDetails = ({history, location, match}: RouteComponentProps<
     };
 
     useEffect(() => {
-        history.push(historyUrl('workflows/{namespace}/{name}', {namespace, name, tab, nodeId, nodePanelView, sidePanel}));
-    }, [namespace, name, tab, nodeId, nodePanelView, sidePanel]);
+        history.push(historyUrl('workflows/{namespace}/{name}', {namespace, name, tab, nodeId, nodePanelView, sidePanel, kiosk}));
+    }, [namespace, name, tab, nodeId, nodePanelView, sidePanel, kiosk]);
 
     const [workflow, setWorkflow] = useState<Workflow>();
     const [links, setLinks] = useState<Link[]>();
