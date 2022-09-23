@@ -19,7 +19,7 @@ import plugins from './plugins';
 import reports from './reports';
 import sensors from './sensors';
 import {uiUrl} from './shared/base';
-import {ChatButton} from './shared/components/chat-button';
+// import {ChatButton} from './shared/components/chat-button';
 import ErrorBoundary from './shared/components/error-boundary';
 import {services} from './shared/services';
 import {Utils} from './shared/utils';
@@ -191,7 +191,7 @@ export const AppRouter = ({popupManager, history, notificationsManager}: {popupM
                                 {namespace && <Redirect to={workflowsUrl + '/' + namespace} />}
                             </Switch>
                         </ErrorBoundary>
-                        <ChatButton />
+                        {/* <ChatButton /> */}
                         {version && modals && <ModalSwitch version={version.version} modals={modals} />}
                     </Layout>
                 </Switch>
